@@ -1,0 +1,53 @@
+What is the value of argv? (hint:  print argv)
+ (char **) 0x7fffffffe648
+
+What is pointed to by argv? (hint:  print argv[0])
+  0x7fffffffe86a
+
+What is the address of the function main?
+  0x4009cf
+
+Try info stack. Explain what you see
+  We can see here all stack frames, 0 is currently executing frame.
+  * #0  counter (stream=0x602010, filename=0x7fffffffe88d "wc.c") at wc.c:61
+    This frame is currently being executed. The "counter" is the name of the
+    currently running function. In brackets there are values of passed
+    arguments and at means is the line that is being executed.
+  #1  0x0000000000400a36 in main (argc=2, argv=0x7fffffffe648) at wc.c:83
+    Here, in addition to function name we see "return address" (rip).
+
+Try info frame. Explain what you see
+  * Stack level 0
+    Frame number in backtrace, 0 is currently executing frame, which grows
+    downwards.
+  * Frame at 0x7fffffffe540
+    Starting memory address of this stack frame.
+  * rip = 0x400961 in counter (wc.c:61);
+    It's a register for next instruction to execute (also called program
+    counter).  In addition it show which line it corresponds.
+  * saved rip = 0x400a36
+    It's called "return address". The instruction that will be executed after
+    exiting from this callee stack. It's pushed into stack right after "CALL"
+    instruction.
+  * called by frame at 0x7fffffffe570
+    Address of the caller stack frame.
+  * source language c.
+    Which language is in use.
+  * Arglist at 0x7fffffffe530, args: stream=0x602010, filename=0x7fffffffe88d
+    The starting address of arguments and the addresses of the arguments itself.
+  * Locals at 0x7fffffffe530
+    Address of local variables.
+  * Previous frame's sp is 0x7fffffffe540
+    This is where the previous frame's stack pointer point to (the caller
+    frame), at the moment of calling, it is also the starting memory address of
+    called stack frame.
+  * Saved registers:
+    * rbp at 0x7fffffffe530
+      Usually considered as starting address of the locals of this stack frame.
+    * rip at 0x7fffffffe538
+      Address of the stack
+
+Try info registers.  Which registers are holding aspects of the program that you
+recognize?
+  rdx, rsi, rdi, rbp, rip
+

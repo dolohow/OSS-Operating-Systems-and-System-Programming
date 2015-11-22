@@ -1,0 +1,17 @@
+What file format is used for this binary? And what architecture is it compiled
+for?
+  file format elf64-x86-64
+  architecture: i386:x86-64
+
+What are some of the names of segments you find?
+  .init, .plt, .text, .fini
+
+What segment contains main (the function) and what is the address of main? (It
+should be the same as what you saw in gdb)
+  Only .text segment
+  The address is 00000000004009cf
+
+Do you see the stack segment anywhere? What about the heap? Explain.
+  The stack segment is initialized by push %rbp. The heap is initialized in
+  malloc section plus dynamic offset.
+

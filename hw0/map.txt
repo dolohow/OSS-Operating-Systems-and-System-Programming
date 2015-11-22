@@ -1,0 +1,83 @@
+Using objdump with the -D flag on the map executable. Which of the addresses
+from the output of running ./map are defined in the executable, and which segment
+is each defined in?
+  Addresses of:
+    * `main` function defined in .text segment
+    * `recur` function defined in .text segment
+    * `stuff` static variable defined in .data segment
+
+Make a list of the important segments, and what they are used for (look up their
+names on the Internet if you don't know).
+  * .interp
+    Holds the path name of a program interpreter (dynamic loader).
+  * .dynsym
+    Holds dynamic symbol table
+  * .dynstr
+    Holds strings needed for dynamic linking, most commonly the strings that
+    represent the names associated with symbol table entries
+  * .rela.dyn
+    Relocation for dynamically linked objects
+  * .rela.plt
+    Holds relocation information. Applies to .plt section
+  * .init
+    This section holds executable instructions that contribute to the process
+    initialization code. When a program starts to run, the system arranges to
+    execute the code in this section before calling the main program entry point
+    (called main for C programs)
+  * .plt
+    Contains jump table used when call functions in the shared library occurs.
+    Those are initialized by linker to point to the dynamic loader instead of
+    target functions.
+  * .text
+    This section contains executable instructions and constant data.
+  * .fini
+    Holds executable instructions that are executed when program exits normally.
+  * .rodata
+    Read-only data segment which contains static constants
+  * .eh_frame_hdr
+    The .eh_frame_hdr section contains additional information about the
+    .eh_frame section. A pointer to the start of the .eh_frame data, and
+    optionally, a binary search table of pointers to the .eh_frame records are
+    found in this section.
+  * .eh_frame
+    For languages with exception support additional informations must be
+    provided to the runtime environment that describes the call frames that much
+    be unwound during the process of exception.
+  * .init_array
+    Holds array pointers to blocks of code that need to be executed when the
+    application is being initialized (before main function call).
+  * .fini_array
+    Holds an array of function pointers that contributes to a single termination
+    array for the executable or shared object containing the section.
+  * .jcr
+    This section contains information necessary for registering compiled Java
+    classes. In case of C code being compiled it remains empty.
+  * .dynamic
+    Contains some shorthand notes used by the dynamic loader.
+  * .got
+    Contains a set of pointers for all of the global variables that are used
+    within a program that come from a shared library.
+  * .data
+    Contains any global or static variables which have a pre-defined value and
+    can be modified. This is any variables that are not defined within a
+    function or are defined in a function but are defined as static so they can
+    retain their value across subsequent calls
+  * .bss segment
+    Adjacent to the data segment. Contains all global variables and static
+    variables that are not initialized or initialized with zero.
+  * .comment
+    Holds version control information such as compiler version.
+
+What direction is the stack growing in?
+  It grows downwards on x86.
+
+How large is the stack frame for each recursive call?
+  8MB
+
+Where is the heap? What direction is it growing in?
+  Heap grows in opposite direction to stack which is upwards on x86.
+
+Are the two malloc()ed memory areas contiguous? (e.g. is there any extra space
+between their addresses?)
+  Yes they are contiguous, but one should be aware that malloc does some memory
+  alignment.
