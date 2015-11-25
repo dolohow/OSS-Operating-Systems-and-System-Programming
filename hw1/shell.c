@@ -143,8 +143,7 @@ int shell(int argc, char *argv[]) {
     if (fundex >= 0) {
       cmd_table[fundex].fun(&tokens[1]);
     } else {
-      /* REPLACE this to run commands as programs. */
-      fprintf(stdout, "This shell doesn't know how to run programs.\n");
+      launch_process(tokens);
     }
 
     if (shell_is_interactive)

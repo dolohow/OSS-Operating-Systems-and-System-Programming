@@ -7,10 +7,12 @@
 #include <termios.h>
 #include <unistd.h>
 
+#include "parse.h"
+
 /**
- * Executes the program pointed by process name
+ * Executes the program from args array
  */
-void launch_process(char *process_name);
+int launch_process(tok_t args[]);
 
 /**
  * Puts a process group with id PID into the foreground. Restores terminal

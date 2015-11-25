@@ -10,10 +10,30 @@
 #include "shell.h"
 
 /**
- * Executes the program pointed by process name
+ * Executes the program from args array
  */
-void launch_process(char *process_name) {
-  /** YOUR CODE HERE */
+int launch_process(tok_t args[]) {
+  int status;
+  pid_t pid;
+
+  pid = fork();
+
+  /* Execute only in child process */
+  if (pid == 0) {
+    execv(args[0], args);
+    _exit(EXIT_FAILURE);
+  }
+  /* Fork failed */
+  else if (pid < 0)
+    status = -1;
+  /* Parent process */
+  else {
+    /* Wait for the child to complete */
+    if (waitpid(pid, &status, 0) != pid)
+      status = -1;
+  }
+
+  return status;
 }
 
 /**
